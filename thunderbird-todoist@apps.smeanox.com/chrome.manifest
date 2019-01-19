@@ -1,0 +1,2 @@
+content thunderbird-todoist content/
+overlay chrome://messenger/content/messenger.xul chrome://thunderbird-todoist/content/overlay.xul

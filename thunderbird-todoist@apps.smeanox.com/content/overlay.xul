@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<overlay id="todoist-add-button-overlay"
+xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script type="application/javascript" src="chrome://thunderbird-todoist/content/overlay.js"/>
+
+  <toolbarpalette id="MailToolbarPalette">
+    <toolbarbutton id="todoist-add-button"
+      class="toolbarbutton-1"
+      label="Todoist"
+      type="button"
+      />
+  </toolbarpalette>
+</overlay>
