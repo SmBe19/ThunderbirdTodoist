@@ -1,13 +1,18 @@
 <?xml version="1.0"?>
+
+<?xml-stylesheet type="text/css" href="chrome://thunderbird-todoist/skin/todoist.css"?>
+
 <overlay id="todoist-add-button-overlay"
 xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script type="application/javascript" src="chrome://thunderbird-todoist/content/overlay.js"/>
 
-  <toolbarpalette id="MailToolbarPalette">
+  <toolbarpalette id="header-view-toolbar-palette">
     <toolbarbutton id="todoist-add-button"
-      class="toolbarbutton-1"
+      class="toolbarbutton-1 msgHeaderView-button hdrTodoistButton"
       label="Todoist"
+      tooltiptext="Send to Todoist"
       type="button"
+      oncommand="alert('hi');"
       />
   </toolbarpalette>
 </overlay>
