@@ -11,35 +11,39 @@
 <body>
     <div id="popup-page">
       <div>
-        <div>
+        <div class="popup-input">
           <input type="text" id="task_content" placeholder="New task...">
         </div>
-        <div>
+        <div class="popup-input">
           <input type="text" id="task_due" placeholder="Due..." value="Today">
         </div>
-        <div>
+        <div class="popup-input">
           <!-- TODO fix this dropdown not being usable -->
           <select id="task_project">
           </select>
         </div>
-        <div>
+        <div class="popup-input">
           <button type="button" id="task_add">Add Task</button>
         </div>
       </div>
-      <div>
+      <div class="button-br">
         <button type="button" id="show_settings">Settings</button>
       </div>
     </div>
     <div id="popup-settings">
-      <div>API-Token: <input type="text" id="apitoken"></div>
-      <div>
+      <div class="popup-input">
+        <input type="text" placeholder="API-Token" id="apitoken">
+      </div>
+      <div class="popup-label">
         Default Project:
+      </div>
+      <div class="popup-input">
         <!-- TODO fix this dropdown not being usable -->
         <select id='defaultproject'>
         </select>
       </div>
-      <div>
-        <button type="button" id="apitoken_save">Save</button>
+      <div class="button-br">
+        <button type="button" id="hide_settings">Hide</button>
       </div>
     </div>
 </body>

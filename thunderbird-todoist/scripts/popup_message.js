@@ -8,9 +8,7 @@ function messageAddTask() {
 }
 
 function prefillContent() {
-  loadDefaultProject().then(proj => {
-    fillAllProjectsSelect('task_project', proj);
-  });
+  fillAllProjectsSelect('task_project');
   browser.tabs.query({
     active: true,
     currentWindow: true,

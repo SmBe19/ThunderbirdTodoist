@@ -13,7 +13,11 @@ function saveSettings() {
     apitoken: token,
     defaultproject: defaultproject,
   });
-  hideSettings();
+}
+
+function saveAndLoadProjects() {
+  saveSettings();
+  fillAllProjectsSelect('defaultproject');
 }
 
 function showSettings() {
@@ -22,9 +26,7 @@ function showSettings() {
   loadAPIToken().then(token => {
     document.getElementById('apitoken').value = token || '';
     if (token) {
-      loadDefaultProject().then(proj => {
-        fillAllProjectsSelect('defaultproject', proj);
-      });
+      fillAllProjectsSelect('defaultproject');
     }
   });
 }
@@ -43,8 +45,10 @@ function showSettingsIfNeeded() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('apitoken_save').addEventListener('click', saveSettings);
+  document.getElementById('hide_settings').addEventListener('click', hideSettings);
   document.getElementById('show_settings').addEventListener('click', showSettings);
+  document.getElementById('apitoken').addEventListener('change', saveAndLoadProjects);
+  document.getElementById('defaultproject').addEventListener('change', saveSettings);
 
   hideSettings();
   showSettingsIfNeeded();

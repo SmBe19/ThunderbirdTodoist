@@ -1,5 +1,42 @@
-body, html {
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   width: 400px;
   height: 200px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#popup-page {
+  width: 100%;
+}
+
+#popup-settings {
+  width: 100%;
+}
+
+.popup-input input, .popup-input select, .popup-input button {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.popup-label {
+  margin-bottom: 5px;
+}
+
+#show_settings, #hide_settings {
+  font-size: x-small;
+}
+
+.button-br {
+  position: relative;
+  height: 30px;
+}
+
+.button-br button {
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }

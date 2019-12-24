@@ -55,27 +55,29 @@ function getAllProjects() {
 }
 
 function fillAllProjectsSelect(selectid, selected) {
-  const el = document.getElementById(selectid);
-  el.innerHTML = '';
-  getAllProjects().then(projects => {
-    function process(proj, indent) {
-      let option = document.createElement('option');
-      let text = '';
-      for (let i = 0; i < indent; i++) {
-        text += '&nbsp;&nbsp;';
+  loadDefaultProject().then(selected => {
+    getAllProjects().then(projects => {
+      function process(proj, indent) {
+        let option = document.createElement('option');
+        let text = '';
+        for (let i = 0; i < indent; i++) {
+          text += '&nbsp;&nbsp;';
+        }
+        option.innerHTML = text + proj.name;
+        option.value = proj.id;
+        if (proj.id == selected) {
+          option.selected = true;
+        }
+        el.add(option);
+        proj.childs.forEach(child => {
+          process(child, indent+1);
+        });
       }
-      option.innerHTML = text + proj.name;
-      option.value = proj.id;
-      if (proj.id == selected) {
-        option.selected = true;
-      }
-      el.add(option);
-      proj.childs.forEach(child => {
-        process(child, indent+1);
+      const el = document.getElementById(selectid);
+      el.innerHTML = '';
+      projects.forEach(proj => {
+        process(proj, 0);
       });
-    }
-    projects.forEach(proj => {
-      process(proj, 0);
     });
   });
 }
