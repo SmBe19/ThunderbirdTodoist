@@ -1,3 +1,0 @@
-content thunderbird-todoist content/
-skin thunderbird-todoist classic/1.0 chrome/skin/
-overlay chrome://messenger/content/msgHdrViewOverlay.xul chrome://thunderbird-todoist/content/overlay.xul

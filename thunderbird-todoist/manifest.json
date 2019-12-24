@@ -1,0 +1,33 @@
+{
+    "manifest_version": 2,
+    "name": "Thunderbird Todoist",
+    "description": "Extension to add tasks to Todoist",
+    "version": "0.1",
+    "author": "Benjamin Schmid",
+    "applications": {
+        "gecko": {
+            "id": "thunderbird-todoist@apps.smeanox.com",
+            "strict_min_version": "66.0"
+        }
+    },
+    "message_display_action": {
+        "default_popup": "popup_message.html",
+        "default_title": "Add Task",
+        "default_icon": "images/icon_32.png"
+    },
+    "compose_action": {
+        "default_popup": "popup_compose.html",
+        "default_title": "Add Task",
+        "default_icon": "images/icon_32.png",
+        "default_area": "maintoolbar"
+    },
+    "permissions": [
+      "storage",
+      "messagesRead"
+    ],
+    "icons": {
+        "64": "images/icon.png",
+        "32": "images/icon_32.png",
+        "16": "images/icon_16.png"
+    }
+}
