@@ -1,7 +1,7 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   width: 400px;
-  height: 200px;
+  height: 170px;
   margin: 8px;
 }
 
@@ -24,19 +24,4 @@ body {
 
 .popup-label {
   margin-bottom: 5px;
-}
-
-#show_settings, #hide_settings {
-  font-size: x-small;
-}
-
-.button-br {
-  position: relative;
-  height: 30px;
-}
-
-.button-br button {
-  position: absolute;
-  right: 0;
-  bottom: 0;
 }

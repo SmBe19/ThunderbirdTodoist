@@ -4,9 +4,6 @@ function messageAddTask() {
   const project = getSelectedProject('task_project');
   addTask(content, due, project).then(res => {
     window.close();
-  })
-  .catch(err => {
-    document.getElementById('task_add').innerHTML = 'Adding Task failed...'
   });
 }
 
@@ -26,5 +23,6 @@ function prefillContent() {
 document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('task_add').addEventListener('click', messageAddTask);
   showSettingsIfNecessary();
-  prefillContent();
+  // TODO figure out how to get current subject
+  //prefillContent();
 });

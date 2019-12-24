@@ -1,3 +1,21 @@
+function loadAPIToken() {
+  return browser.storage.local.get('apitoken').then(token => token.apitoken);
+}
+
+function loadDefaultProject() {
+  return browser.storage.local.get('defaultproject').then(token => token.defaultproject);
+}
+
+function showSettingsIfNecessary() {
+  loadAPIToken().then(token => {
+    console.log(token, token.length);
+    if (!token || token.length < 40) {
+      // TODO does not work...
+      browser.runtime.openOptionsPage();
+    }
+  });
+}
+
 function doRequest(endpoint, config) {
   return loadAPIToken().then(token => {
     config.headers = {
@@ -78,6 +96,10 @@ function fillAllProjectsSelect(selectid, selected) {
       projects.forEach(proj => {
         process(proj, 0);
       });
+    })
+    .catch(err => {
+      const el = document.getElementById(selectid);
+      el.innerHTML = '<option value="0">Could not connect to Todoist...</option>';
     });
   });
 }
