@@ -4,4 +4,4 @@ Thunderbird Add-On for [Todoist](https://todoist.com).
 Not created by, affiliated with, or supported by Doist.
 
 ## Installation
-TODO
+To install the add-on, download the xpi file from [here](https://dl.smeanox.com/thunderbird-todoist-0.1.xpi). Open the add-ons page in Thunderbird and choose 'install from file'.
