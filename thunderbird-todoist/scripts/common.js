@@ -79,7 +79,7 @@ function fillAllProjectsSelect(selectid, selected) {
         let option = document.createElement('option');
         let text = '';
         for (let i = 0; i < indent; i++) {
-          text += '&nbsp;&nbsp;';
+          text += '&nbsp;&nbsp;&nbsp;';
         }
         option.innerHTML = text + proj.name;
         option.value = proj.id;
