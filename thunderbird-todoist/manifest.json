@@ -32,5 +32,21 @@
         "64": "images/icon.png",
         "32": "images/icon_32.png",
         "16": "images/icon_16.png"
+    },
+    "experiment_apis": {
+      "msgUrl": {
+        "schema": "schema.json",
+        "parent": {
+          "scopes": [
+            "addon_parent"
+          ],
+          "paths": [
+            [
+              "msgUrl"
+            ]
+          ],
+          "script": "msg_url.js"
+        }
+      }
     }
 }

@@ -18,7 +18,12 @@ function prefillContent() {
   }).then(tabs => {
     let tabId = tabs[0].id;
     browser.messageDisplay.getDisplayedMessage(tabId).then((message) => {
-      document.getElementById('task_content').value = 'Mail by ' + message.author + ': ' + message.subject;
+      browser.msgUrl.url(tabId).then((url) => {
+        console.error(url);
+        const thundoist = url.url; // .replace(/^(imap|mailbox)-message:\/\//, 'thundoist://$1-')
+
+        document.getElementById('task_content').value = `[Mail by ${message.author}: ${message.subject}](${thundoist})`;
+      });
     });
   });
 }

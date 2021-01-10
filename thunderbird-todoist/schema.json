@@ -1,0 +1,19 @@
+[
+    {
+        "namespace": "msgUrl",
+        "functions": [
+            {
+                "name": "url",
+                "type": "function",
+                "async": true,
+                "parameters": [
+                  {
+                    "name": "tabId",
+                    "type": "integer",
+                    "description": "The tab"
+                  }
+                ]
+            }
+        ]
+    }
+]
