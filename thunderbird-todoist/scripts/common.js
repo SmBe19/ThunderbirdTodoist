@@ -1,9 +1,13 @@
 function loadAPIToken() {
-  return browser.storage.local.get('apitoken').then(token => token.apitoken);
+  return browser.storage.local.get('apitoken').then(res => res.apitoken);
 }
 
 function loadDefaultProject() {
-  return browser.storage.local.get('defaultproject').then(token => token.defaultproject);
+  return browser.storage.local.get('defaultproject').then(res => res.defaultproject);
+}
+
+function loadMaillink() {
+  return browser.storage.local.get('maillink').then(res => res.maillink === '1');
 }
 
 function showSettingsIfNecessary() {

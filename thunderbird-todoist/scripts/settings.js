@@ -1,9 +1,11 @@
 function saveSettings() {
   const token = document.getElementById('apitoken').value;
   const defaultproject = getSelectedProject('defaultproject');
+  const maillink = document.getElementById('maillink').checked;
   browser.storage.local.set({
     apitoken: token,
     defaultproject: defaultproject,
+    maillink: maillink ? '1' : '0',
   });
 }
 
@@ -40,5 +42,6 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('apitoken').addEventListener('keyup', enableApplyToken);
   document.getElementById('defaultproject').addEventListener('change', saveSettings);
   document.getElementById('tokenapplybutton').addEventListener('click', applyToken);
+  document.getElementById('maillink').addEventListener('change', saveSettings);
   initSettings();
 });

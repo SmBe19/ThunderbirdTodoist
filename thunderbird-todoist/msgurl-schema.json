@@ -1,0 +1,20 @@
+[
+    {
+        "namespace": "msgurl",
+        "functions": [
+            {
+                "name": "url",
+                "type": "function",
+                "description": "Get URL for message",
+                "async": true,
+                "parameters": [
+                  {
+                    "name": "tabId",
+                    "type": "integer",
+                    "description": "Id of current tab"
+                  }
+                ]
+            }
+        ]
+    }
+]

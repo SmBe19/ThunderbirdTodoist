@@ -18,7 +18,15 @@ function prefillContent() {
   }).then(tabs => {
     let tabId = tabs[0].id;
     browser.messageDisplay.getDisplayedMessage(tabId).then((message) => {
-      document.getElementById('task_content').value = 'Mail by ' + message.author + ': ' + message.subject;
+      loadMaillink().then(maillink => {
+        if (maillink) {
+          browser.msgurl.url(tabId).then(url => {
+            document.getElementById('task_content').value = '[Mail by ' + message.author + ': ' + message.subject + '](' + url.url + ')';
+          });
+        } else {
+          document.getElementById('task_content').value = 'Mail by ' + message.author + ': ' + message.subject;
+        }
+      })
     });
   });
 }
