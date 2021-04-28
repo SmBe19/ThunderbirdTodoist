@@ -30,6 +30,9 @@ function initSettings() {
       fillAllProjectsSelect('defaultproject');
     }
   });
+  loadMaillink().then(res => {
+    document.getElementById('maillink').checked = res;
+  });
 }
 
 function hideSettings() {
