@@ -22,7 +22,9 @@
         "default_area": "maintoolbar"
     },
     "options_ui": {
-      "page": "settings.html"
+      "page": "settings.html",
+      "open_in_tab": false,
+      "browser_style": true
     },
     "permissions": [
       "storage",

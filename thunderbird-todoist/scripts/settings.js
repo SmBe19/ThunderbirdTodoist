@@ -12,6 +12,15 @@ function saveAndLoadProjects() {
   fillAllProjectsSelect('defaultproject');
 }
 
+function enableApplyToken() {
+  document.getElementById('tokenapplybutton').disabled = false;
+}
+
+function applyToken() {
+  saveAndLoadProjects();
+  document.getElementById('tokenapplybutton').disabled = true;
+}
+
 function initSettings() {
   loadAPIToken().then(token => {
     document.getElementById('apitoken').value = token || '';
@@ -28,6 +37,8 @@ function hideSettings() {
 
 document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('apitoken').addEventListener('change', saveAndLoadProjects);
+  document.getElementById('apitoken').addEventListener('keyup', enableApplyToken);
   document.getElementById('defaultproject').addEventListener('change', saveSettings);
+  document.getElementById('tokenapplybutton').addEventListener('click', applyToken);
   initSettings();
 });

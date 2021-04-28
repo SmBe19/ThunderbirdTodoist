@@ -13,10 +13,6 @@ body {
   width: 100%;
 }
 
-#popup-settings {
-  width: 100%;
-}
-
 .popup-input input, .popup-input select, .popup-input button {
   width: 100%;
   margin-bottom: 10px;

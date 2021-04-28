@@ -6,14 +6,22 @@
     <link rel="stylesheet" type="text/css" media="screen" href="popup.css">
     <script src="scripts/common.js" type="text/javascript"></script>
     <script src="scripts/settings.js" type="text/javascript"></script>
+    <style>
+      #settings {
+        width: 100%;
+      }
+    </style>
 </head>
 <body>
-    <div id="popup-settings">
+    <div id="settings">
       <div class="popup-label">
         API-Token (<a href="https://todoist.com/prefs/integrations">see here</a>):
       </div>
       <div class="popup-input">
         <input type="text" placeholder="API-Token" id="apitoken">
+      </div>
+      <div class="popup-input">
+        <button style="width: auto" id="tokenapplybutton" disabled>Save Token</button>
       </div>
       <div class="popup-label">
         Default Project:
