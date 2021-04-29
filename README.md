@@ -3,6 +3,9 @@ Thunderbird Add-On for [Todoist](https://todoist.com).
 
 Not created by, affiliated with, or supported by Doist.
 
+## Overview
+This plugin adds a button to Thunderbird to add a new task for the selected email. Project and due date can be set directly when adding a task. It is also possible to add a link to the task which opens the email in Thunderbird.
+
 ## Installation
 To install the add-on, visit the [add-on page](https://addons.thunderbird.net/de/thunderbird/addon/thunderbird-todoist/).
 
