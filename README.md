@@ -46,9 +46,11 @@ Foreach ($type in $types) {
   New-Item "${key}\shell\open\command" -force -ea SilentlyContinue
   New-ItemProperty -LiteralPath $key -Name '(default)' -Value 'URL:Thunderbird Todoist Links' -PropertyType String -Force -ea SilentlyContinue
   New-ItemProperty -LiteralPath $key -Name 'URL Protocol' -Value '' -PropertyType String -Force -ea SilentlyContinue
-  New-ItemProperty -LiteralPath "${key}\shell\open\command" -Name '(default)' -Value '\"C:\Program Files (x86)\Mozilla Thunderbird\thunderbird.exe\" -mail \"%1\' -PropertyType String -Force -ea SilentlyContinue
+  New-ItemProperty -LiteralPath "${key}\shell\open\command" -Name '(default)' -Value '\"C:\Program Files (x86)\Mozilla Thunderbird\thunderbird.exe\" -mail \"%1\"\' -PropertyType String -Force -ea SilentlyContinue
   }
 ```
+
+If you have issues with getting this to work, please check out [this issue](https://github.com/SmBe19/ThunderbirdTodoist/issues/13) and comment there, if this does not resolve it.
 
 ## Credits
 The Mail-Links implementation is based on code by [John Ferlito](https://github.com/johnf).
