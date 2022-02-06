@@ -46,7 +46,7 @@ Foreach ($type in $types) {
   New-Item "${key}\shell\open\command" -force -ea SilentlyContinue
   New-ItemProperty -LiteralPath $key -Name '(default)' -Value 'URL:Thunderbird Todoist Links' -PropertyType String -Force -ea SilentlyContinue
   New-ItemProperty -LiteralPath $key -Name 'URL Protocol' -Value '' -PropertyType String -Force -ea SilentlyContinue
-  New-ItemProperty -LiteralPath "${key}\shell\open\command" -Name '(default)' -Value '\"C:\Program Files (x86)\Mozilla Thunderbird\thunderbird.exe\" -mail \"%1\"' -PropertyType String -Force -ea SilentlyContinue
+  New-ItemProperty -LiteralPath "${key}\shell\open\command" -Name '(default)' -Value '"C:\Program Files (x86)\Mozilla Thunderbird\thunderbird.exe" -mail "%1"' -PropertyType String -Force -ea SilentlyContinue
   }
 ```
 
