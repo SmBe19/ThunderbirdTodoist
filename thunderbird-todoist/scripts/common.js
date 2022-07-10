@@ -108,9 +108,10 @@ function fillAllProjectsSelect(selectid, selected) {
   });
 }
 
-function addTask(content, due, projectid) {
+function addTask(content, due, projectid, messageContent) {
   return requestPost('tasks', {
     content: content,
+    description: messageContent,
     due_string: due,
     project_id: parseInt(projectid, 10),
   });
