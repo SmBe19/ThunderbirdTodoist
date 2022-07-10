@@ -10,6 +10,10 @@ function loadMaillink() {
   return browser.storage.local.get('maillink').then(res => res.maillink === '1');
 }
 
+function loadIncludeMessageBody() {
+  return browser.storage.local.get('includeMessageBody').then(res => res.fwdContent === '1');
+}
+
 function showSettingsIfNecessary() {
   loadAPIToken().then(token => {
     console.log(token, token.length);
@@ -108,9 +112,10 @@ function fillAllProjectsSelect(selectid, selected) {
   });
 }
 
-function addTask(content, due, projectid) {
+function addTask(content, due, projectid, messageContent) {
   return requestPost('tasks', {
     content: content,
+    description: messageContent,
     due_string: due,
     project_id: parseInt(projectid, 10),
   });
