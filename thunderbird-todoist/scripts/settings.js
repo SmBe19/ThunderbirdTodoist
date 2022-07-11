@@ -35,7 +35,7 @@ function initSettings() {
   loadMaillink().then(res => {
     document.getElementById('maillink').checked = res;
   });
-  loadMaillink().then(res => {
+  loadIncludeMessageBody().then(res => {
     document.getElementById('includeMessageBody').checked = res;
   });
 }
