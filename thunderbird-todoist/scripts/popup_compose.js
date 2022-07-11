@@ -2,7 +2,10 @@ function messageAddTask() {
   const content = document.getElementById('task_content').value;
   const due = document.getElementById('task_due').value || 'Today';
   const project = getSelectedProject('task_project');
-  const messageContent = message.content;
+  const messageContent = ""; 
+  if (loadFwdContent()) { 
+    messageContent = message.content;
+  }
   addTask(content, due, project, messageContent).then(res => {
     window.close();
   });

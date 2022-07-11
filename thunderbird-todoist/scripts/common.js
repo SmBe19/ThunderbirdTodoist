@@ -10,6 +10,10 @@ function loadMaillink() {
   return browser.storage.local.get('maillink').then(res => res.maillink === '1');
 }
 
+function loadFwdContent() {
+  return browser.storage.local.get('fwdContent').then(res => res.fwdContent === '1');
+}
+
 function showSettingsIfNecessary() {
   loadAPIToken().then(token => {
     console.log(token, token.length);

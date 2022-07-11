@@ -2,6 +2,7 @@ function saveSettings() {
   const token = document.getElementById('apitoken').value;
   const defaultproject = getSelectedProject('defaultproject');
   const maillink = document.getElementById('maillink').checked;
+  const fwdContent = document.getElementById('fwdContent').checked;
   browser.storage.local.set({
     apitoken: token,
     defaultproject: defaultproject,
@@ -33,6 +34,9 @@ function initSettings() {
   loadMaillink().then(res => {
     document.getElementById('maillink').checked = res;
   });
+  loadMaillink().then(res => {
+    document.getElementById('maillink').checked = res;
+  });
 }
 
 function hideSettings() {
@@ -46,5 +50,6 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('defaultproject').addEventListener('change', saveSettings);
   document.getElementById('tokenapplybutton').addEventListener('click', applyToken);
   document.getElementById('maillink').addEventListener('change', saveSettings);
+  document.getElementById('fwdContent').addEventListener('change', saveSettings);
   initSettings();
 });
