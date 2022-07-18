@@ -4,6 +4,9 @@ function messageAddTask() {
 
 function prefillContent() {
   fillAllProjectsSelect('task_project');
+  loadDefaultDue().then(res => {
+    document.getElementById('task_due').placeholder = res;
+  });
   loadIncludeMessageBody().then(res => {
     document.getElementById('include_message_body').checked = res;
   });

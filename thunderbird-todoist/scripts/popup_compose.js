@@ -4,6 +4,9 @@ function messageAddTask() {
 
 function prefillContent() {
   fillAllProjectsSelect('task_project');
+  loadDefaultDue().then(res => {
+    document.getElementById('task_due').placeholder = res;
+  });
   getDisplayedMessage().then(([message]) => {
     document.getElementById('task_content').value = 'Mail by ' + message.author + ': ' + message.subject;
   });

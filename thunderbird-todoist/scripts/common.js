@@ -6,6 +6,10 @@ function loadDefaultProject() {
   return browser.storage.local.get('defaultproject').then(res => res.defaultproject);
 }
 
+function loadDefaultDue() {
+  return browser.storage.local.get('defaultdue').then(res => res.defaultdue || "Today");
+}
+
 function loadMaillink() {
   return browser.storage.local.get('maillink').then(res => res.maillink === '1');
 }
@@ -140,7 +144,7 @@ function findMessageBody(messageId) {
 
 function addTaskFromMessage(contentid, dueid, selectid, includebodyid, failid) {
   const content = document.getElementById(contentid).value;
-  const due = document.getElementById(dueid).value || 'Today';
+  const due = document.getElementById(dueid).value || document.getElementById(dueid).placeholder;
   const project = getSelectedProject(selectid);
   const includeMessageBody = includebodyid ? document.getElementById(includebodyid).checked : false;
   Promise.resolve().then(() => {
