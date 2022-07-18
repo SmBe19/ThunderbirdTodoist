@@ -10,8 +10,8 @@ function loadDefaultDue() {
   return browser.storage.local.get('defaultdue').then(res => res.defaultdue || "Today");
 }
 
-function loadMaillink() {
-  return browser.storage.local.get('maillink').then(res => res.maillink === '1');
+function loadDefaultContentFormat() {
+  return browser.storage.local.get('defaultcontentformat').then(res => res.defaultcontentformat || "Mail by %author%: %subject%");
 }
 
 function loadIncludeMessageBody() {
@@ -140,6 +140,34 @@ function findMessageBody(messageId) {
 
   return browser.messages.getFull(messageId).then(fullMessage =>
     traversePart(fullMessage, 'text/plain') || traversePart(fullMessage, 'text/html'));
+}
+
+function formatDefaultTaskContent(message, maillink) {
+  function twoDigits(num) {
+    if (num < 10) {
+      return "0" + num;
+    }
+    return num;
+  }
+
+  return loadDefaultContentFormat().then(contentFormat => contentFormat
+    .replace("%author%", message.author)
+    .replace("%subject%", message.subject)
+    .replace("%date-Y%", message.date.getFullYear())
+    .replace("%date-M%", message.date.getMonth()+1)
+    .replace("%date-D%", message.date.getDate())
+    .replace("%date-h%", message.date.getHours())
+    .replace("%date-m%", message.date.getMinutes())
+    .replace("%date-s%", message.date.getSeconds())
+    .replace("%date-YYYY%", message.date.getFullYear())
+    .replace("%date-MM%", twoDigits(message.date.getMonth()+1))
+    .replace("%date-DD%", twoDigits(message.date.getDate()))
+    .replace("%date-hh%", twoDigits(message.date.getHours()))
+    .replace("%date-mm%", twoDigits(message.date.getMinutes()))
+    .replace("%date-ss%", twoDigits(message.date.getSeconds()))
+    .replace("%msgid%", message.headerMessageId)
+    .replace("%msgurl%", maillink)
+  )
 }
 
 function addTaskFromMessage(contentid, dueid, selectid, includebodyid, failid) {

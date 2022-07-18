@@ -2,13 +2,16 @@ function saveSettings() {
   const token = document.getElementById('apitoken').value;
   const defaultproject = getSelectedProject('defaultproject');
   const defaultdue = document.getElementById('defaultdue').value;
-  const maillink = document.getElementById('maillink').checked;
+  let defaultContentFormat = document.getElementById('defaultcontentformat').value;
+  if (defaultContentFormat === 'custom') {
+    defaultContentFormat = document.getElementById('defaultcontentformat-custom').value;
+  }
   const includeMessageBody = document.getElementById('include_message_body').checked;
   browser.storage.local.set({
     apitoken: token,
     defaultproject: defaultproject,
     defaultdue: defaultdue,
-    maillink: maillink ? '1' : '0',
+    defaultcontentformat: defaultContentFormat,
     includeMessageBody: includeMessageBody ? '1' : '0',
   });
 }
@@ -27,6 +30,20 @@ function applyToken() {
   document.getElementById('tokenapplybutton').disabled = true;
 }
 
+function updateCustomTaskFormat() {
+  const value = document.getElementById('defaultcontentformat').value;
+  let maillink = false;
+  let custom = false;
+  if (value.includes('%msgurl%')) {
+    maillink = true;
+  } else if (value === 'custom') {
+    maillink = true;
+    custom = true;
+  }
+  document.getElementById('setupinstructions-maillink').style.display = maillink ? 'block' : 'none';
+  document.getElementById('defaultcontentformat-custom-wrapper').style.display = custom ? 'block' : 'none';
+}
+
 function initSettings() {
   loadAPIToken().then(token => {
     document.getElementById('apitoken').value = token || '';
@@ -37,9 +54,15 @@ function initSettings() {
   loadDefaultDue().then(res => {
     document.getElementById('defaultdue').value = res;
   });
-  loadMaillink().then(res => {
-    document.getElementById('maillink').checked = res;
-  });
+  loadDefaultContentFormat().then(res => {
+    const element = document.getElementById('defaultcontentformat');
+    element.value = res;
+    if (element.value !== res) {
+      element.value = 'custom';
+      document.getElementById('defaultcontentformat-custom').value = res;
+    }
+    updateCustomTaskFormat();
+  })
   loadIncludeMessageBody().then(res => {
     document.getElementById('include_message_body').checked = res;
   });
@@ -56,7 +79,10 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('defaultproject').addEventListener('change', saveSettings);
   document.getElementById('tokenapplybutton').addEventListener('click', applyToken);
   document.getElementById('defaultdue').addEventListener('change', saveSettings);
-  document.getElementById('maillink').addEventListener('change', saveSettings);
+  document.getElementById('defaultcontentformat').addEventListener('change', saveSettings);
+  document.getElementById('defaultcontentformat-custom').addEventListener('change', saveSettings);
   document.getElementById('include_message_body').addEventListener('change', saveSettings);
+  
+  document.getElementById('defaultcontentformat').addEventListener('change', updateCustomTaskFormat);
   initSettings();
 });

@@ -7,14 +7,10 @@ function prefillContent() {
   loadDefaultDue().then(res => {
     document.getElementById('task_due').placeholder = res;
   });
-  getDisplayedMessage().then(([message]) => {
-    document.getElementById('task_content').value = 'Mail by ' + message.author + ': ' + message.subject;
-  });
 }
 
 document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('task_add').addEventListener('click', messageAddTask);
   showSettingsIfNecessary();
-  // TODO figure out how to get current subject
-  //prefillContent();
+  prefillContent();
 });

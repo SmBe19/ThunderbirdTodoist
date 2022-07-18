@@ -11,15 +11,10 @@ function prefillContent() {
     document.getElementById('include_message_body').checked = res;
   });
   getDisplayedMessage().then(([message, tabId]) => {
-    loadMaillink().then(maillink => {
-      if (maillink) {
-        browser.msgurl.url(tabId).then(url => {
-          document.getElementById('task_content').value = '[Mail by ' + message.author + ': ' + message.subject + '](' + url.url + ')';
-        });
-      } else {
-        document.getElementById('task_content').value = 'Mail by ' + message.author + ': ' + message.subject;
-      }
-    });
+    return browser.msgurl.url(tabId).then(msgurl => formatDefaultTaskContent(message, msgurl.url));
+  })
+  .then(defaultTaskContent => {
+    document.getElementById('task_content').value = defaultTaskContent;
   });
 }
 

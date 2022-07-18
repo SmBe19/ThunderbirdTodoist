@@ -25,3 +25,8 @@ body {
 .popup-label {
   margin-bottom: 5px;
 }
+
+.popup-indented {
+  width: 95%;
+  margin-left: 5%;
+}

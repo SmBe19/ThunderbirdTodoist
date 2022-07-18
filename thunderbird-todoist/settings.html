@@ -42,11 +42,26 @@
           <option value="No date">No date</option>
         </select>
       </div>
-      <div>
-        <label>
-          <input type="checkbox" id="maillink">
-          Insert mail-link in task (see <a href="https://github.com/SmBe19/ThunderbirdTodoist">setup instructions</a>)
-        </label>
+      <div class="popup-label">
+        Default Task Format:
+      </div>
+      <div class="popup-input">
+        <select id='defaultcontentformat'>
+          <option value="Mail by %author%: %subject%">Default</option>
+          <option value="[Mail by %author%: %subject%](%msgurl%)">Mail link</option>
+          <option value="custom">Custom</option>
+        </select>
+      </div>
+      <div class="popup-label popup-indented" id="setupinstructions-maillink">
+        See <a href="https://github.com/SmBe19/ThunderbirdTodoist">setup instructions</a> if you want to use mail links.
+      </div>
+      <div class="popup-indented" id="defaultcontentformat-custom-wrapper">
+        <div class="popup-label">
+          You can use the following parameters which get replaced by the value from the message:<br>%author%, %subject%, %msgid%, %msgurl%,<br>%date-Y%, %date-M%, %date-D%, %date-h%, %date-m%, %date-s%, %date-YYYY%, %date-MM%, %date-DD%, %date-hh%, %date-mm%, %date-ss%
+        </div>
+        <div class="popup-input">
+          <input type="text" placeholder="Mail by %author%: %subject%" id="defaultcontentformat-custom">
+        </div>
       </div>
       <div>
         <label>
