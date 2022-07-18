@@ -11,7 +11,7 @@ function loadMaillink() {
 }
 
 function loadIncludeMessageBody() {
-  return browser.storage.local.get('includeMessageBody').then(res => res.fwdContent === '1');
+  return browser.storage.local.get('includeMessageBody').then(res => res.includeMessageBody === '1');
 }
 
 function showSettingsIfNecessary() {
@@ -109,6 +109,54 @@ function fillAllProjectsSelect(selectid, selected) {
       const el = document.getElementById(selectid);
       el.innerHTML = '<option value="0">Could not connect to Todoist...</option>';
     });
+  });
+}
+
+function getDisplayedMessage() {
+  return browser.tabs.query({
+    active: true,
+    currentWindow: true,
+  })
+  .then((tabs) => browser.messageDisplay.getDisplayedMessage(tabs[0].id)
+    .then(message => [message, tabs[0].id])
+  );
+}
+
+function findMessageBody(messageId) {
+  function traversePart(part, contentType) {
+    if (part.contentType.toLowerCase() === contentType) {
+      return part.body;
+    }
+    for (currentPart of (part.parts || [])) {
+      const result = traversePart(currentPart, contentType);
+      if (result !== undefined) {
+        return result;
+      }
+    }
+  }
+
+  return browser.messages.getFull(messageId).then(fullMessage =>
+    traversePart(fullMessage, 'text/plain') || traversePart(fullMessage, 'text/html'));
+}
+
+function addTaskFromMessage(contentid, dueid, selectid, includebodyid, failid) {
+  const content = document.getElementById(contentid).value;
+  const due = document.getElementById(dueid).value || 'Today';
+  const project = getSelectedProject(selectid);
+  const includeMessageBody = includebodyid ? document.getElementById(includebodyid).checked : false;
+  Promise.resolve().then(() => {
+    if (includeMessageBody) {
+      return getDisplayedMessage().then(([message]) => findMessageBody(message.id));
+    } else {
+      return "";
+    }
+  })
+  .then(messageContent => addTask(content, due, project, messageContent))
+  .then(res => {
+    window.close();
+  })
+  .catch(err => {
+    document.getElementById(failid).innerHTML = 'Adding Task failed...'
   });
 }
 

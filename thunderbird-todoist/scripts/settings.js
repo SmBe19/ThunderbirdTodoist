@@ -2,7 +2,7 @@ function saveSettings() {
   const token = document.getElementById('apitoken').value;
   const defaultproject = getSelectedProject('defaultproject');
   const maillink = document.getElementById('maillink').checked;
-  const includeMessageBody = document.getElementById('includeMessageBody').checked;
+  const includeMessageBody = document.getElementById('include_message_body').checked;
   browser.storage.local.set({
     apitoken: token,
     defaultproject: defaultproject,
@@ -36,7 +36,7 @@ function initSettings() {
     document.getElementById('maillink').checked = res;
   });
   loadIncludeMessageBody().then(res => {
-    document.getElementById('includeMessageBody').checked = res;
+    document.getElementById('include_message_body').checked = res;
   });
 }
 
@@ -51,6 +51,6 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('defaultproject').addEventListener('change', saveSettings);
   document.getElementById('tokenapplybutton').addEventListener('click', applyToken);
   document.getElementById('maillink').addEventListener('change', saveSettings);
-  document.getElementById('includeMessageBody').addEventListener('change', saveSettings);
+  document.getElementById('include_message_body').addEventListener('change', saveSettings);
   initSettings();
 });
