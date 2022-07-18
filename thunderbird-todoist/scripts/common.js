@@ -16,7 +16,6 @@ function loadIncludeMessageBody() {
 
 function showSettingsIfNecessary() {
   loadAPIToken().then(token => {
-    console.log(token, token.length);
     if (!token || token.length < 40) {
       // TODO does not work...
       browser.runtime.openOptionsPage();
