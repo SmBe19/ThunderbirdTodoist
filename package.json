@@ -1,0 +1,21 @@
+{
+  "name": "thunderbirdtodoist",
+  "description": "Thunderbird Add-On for [Todoist](https://todoist.com).",
+  "version": "0.3",
+  "scripts": {
+    "format": "prettier --write thunderbird-todoist"
+  },
+  "devDependencies": {
+    "prettier": "^2.7.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SmBe19/ThunderbirdTodoist.git"
+  },
+  "author": "Benjamin Schmid",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SmBe19/ThunderbirdTodoist/issues"
+  },
+  "homepage": "https://github.com/SmBe19/ThunderbirdTodoist#readme"
+}

@@ -1,4 +1,6 @@
-var { ExtensionCommon } = ChromeUtils.import("resource://gre/modules/ExtensionCommon.jsm");
+var { ExtensionCommon } = ChromeUtils.import(
+  "resource://gre/modules/ExtensionCommon.jsm"
+);
 
 var msgurl = class extends ExtensionCommon.ExtensionAPI {
   getAPI(context) {
@@ -10,8 +12,8 @@ var msgurl = class extends ExtensionCommon.ExtensionAPI {
           const url = msg.folder.getUriForMsg(msg);
 
           return { url };
-        }
-      }
-    }
+        },
+      },
+    };
   }
 };

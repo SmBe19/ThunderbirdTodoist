@@ -1,5 +1,5 @@
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   width: 400px;
   margin: 8px;
 }
@@ -12,7 +12,9 @@ body {
   width: 100%;
 }
 
-.popup-input input, .popup-input select, .popup-input button {
+.popup-input input,
+.popup-input select,
+.popup-input button {
   width: 100%;
   margin-bottom: 10px;
 }

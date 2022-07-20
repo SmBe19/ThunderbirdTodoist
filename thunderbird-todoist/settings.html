@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>Thunderbird Todoist</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="popup.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="popup.css" />
     <script src="scripts/common.js" type="text/javascript"></script>
     <script src="scripts/settings_utils.js" type="text/javascript"></script>
     <script src="scripts/api_utils.js" type="text/javascript"></script>
@@ -13,30 +13,28 @@
         width: 100%;
       }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div id="settings">
       <div class="popup-label">
-        API-Token (<a href="https://todoist.com/prefs/integrations">see here</a>):
+        API-Token (<a href="https://todoist.com/prefs/integrations">see here</a
+        >):
       </div>
       <div class="popup-input">
-        <input type="text" placeholder="API-Token" id="apitoken">
+        <input type="text" placeholder="API-Token" id="apitoken" />
       </div>
       <div class="popup-input">
-        <button style="width: auto" id="tokenapplybutton" disabled>Save Token</button>
+        <button style="width: auto" id="tokenapplybutton" disabled>
+          Save Token
+        </button>
       </div>
-      <div class="popup-label">
-        Default Project:
-      </div>
+      <div class="popup-label">Default Project:</div>
       <div class="popup-input">
-        <select id='defaultproject'>
-        </select>
+        <select id="defaultproject"></select>
       </div>
-      <div class="popup-label">
-        Default Due Date:
-      </div>
+      <div class="popup-label">Default Due Date:</div>
       <div class="popup-input">
-        <select id='defaultdue'>
+        <select id="defaultdue">
           <option value="Today">Today</option>
           <option value="Tomorrow">Tomorrow</option>
           <option value="Next week">Next week</option>
@@ -44,33 +42,44 @@
           <option value="No date">No date</option>
         </select>
       </div>
-      <div class="popup-label">
-        Default Task Format:
-      </div>
+      <div class="popup-label">Default Task Format:</div>
       <div class="popup-input">
-        <select id='defaultcontentformat'>
+        <select id="defaultcontentformat">
           <option value="Mail by %author%: %subject%">Default</option>
-          <option value="[Mail by %author%: %subject%](%msgurl%)">Mail link</option>
+          <option value="[Mail by %author%: %subject%](%msgurl%)">
+            Mail link
+          </option>
           <option value="custom">Custom</option>
         </select>
       </div>
       <div class="popup-label popup-indented" id="setupinstructions-maillink">
-        See <a href="https://github.com/SmBe19/ThunderbirdTodoist">setup instructions</a> if you want to use mail links.
+        See
+        <a href="https://github.com/SmBe19/ThunderbirdTodoist"
+          >setup instructions</a
+        >
+        if you want to use mail links.
       </div>
       <div class="popup-indented" id="defaultcontentformat-custom-wrapper">
         <div class="popup-label">
-          You can use the following parameters which get replaced by the value from the message:<br>%author%, %subject%, %msgid%, %msgurl%,<br>%date-Y%, %date-M%, %date-D%, %date-h%, %date-m%, %date-s%, %date-YYYY%, %date-MM%, %date-DD%, %date-hh%, %date-mm%, %date-ss%
+          You can use the following parameters which get replaced by the value
+          from the message:<br />%author%, %subject%, %msgid%, %msgurl%,<br />%date-Y%,
+          %date-M%, %date-D%, %date-h%, %date-m%, %date-s%, %date-YYYY%,
+          %date-MM%, %date-DD%, %date-hh%, %date-mm%, %date-ss%
         </div>
         <div class="popup-input">
-          <input type="text" placeholder="Mail by %author%: %subject%" id="defaultcontentformat-custom">
+          <input
+            type="text"
+            placeholder="Mail by %author%: %subject%"
+            id="defaultcontentformat-custom"
+          />
         </div>
       </div>
       <div>
         <label>
-          <input type="checkbox" id="include_message_body">
+          <input type="checkbox" id="include_message_body" />
           Add mail content as task description by default
         </label>
       </div>
     </div>
-</body>
+  </body>
 </html>
