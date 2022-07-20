@@ -9,7 +9,7 @@ This plugin adds a button to Thunderbird to add a new task for the selected emai
 ## Installation
 To install the add-on, visit the [add-on page](https://addons.thunderbird.net/de/thunderbird/addon/thunderbird-todoist/).
 
-You can also download the xpi file from [here](https://dl.smeanox.com/thunderbird-todoist-0.3.xpi). Open the add-ons page in Thunderbird and choose 'install from file'.
+You can also download the xpi file from [here](https://dl.smeanox.com/thunderbird-todoist-0.4.xpi). Open the add-ons page in Thunderbird and choose 'install from file'.
 
 ### Mail-Links
 To support Mail-Links (i.e. direct links from Todoist to open a mail in Thunderbird), you need to register the protocol in the OS.
