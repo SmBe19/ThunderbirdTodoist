@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('defaultcontentformat').addEventListener('change', saveSettings);
   document.getElementById('defaultcontentformat-custom').addEventListener('change', saveSettings);
   document.getElementById('include_message_body').addEventListener('change', saveSettings);
-  
+
   document.getElementById('defaultcontentformat').addEventListener('change', updateCustomTaskFormat);
   initSettings();
 });
