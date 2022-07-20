@@ -1,7 +1,7 @@
 {
   "name": "thunderbirdtodoist",
   "description": "Thunderbird Add-On for [Todoist](https://todoist.com).",
-  "version": "0.3",
+  "version": "0.4",
   "scripts": {
     "format": "prettier --write thunderbird-todoist"
   },
