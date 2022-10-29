@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Thunderbird Todoist",
   "description": "Extension to add tasks to Todoist",
-  "version": "0.4",
+  "version": "0.5",
   "author": "Benjamin Schmid",
   "applications": {
     "gecko": {

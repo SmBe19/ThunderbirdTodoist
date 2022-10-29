@@ -7,7 +7,7 @@ function doRequest(endpoint, config) {
       config.headers["Content-Type"] = "application/json";
     }
     return window
-      .fetch("https://api.todoist.com/rest/v1/" + endpoint, config)
+      .fetch("https://api.todoist.com/rest/v2/" + endpoint, config)
       .then((res) => {
         if (!res.ok) {
           console.log("Error with request to " + endpoint + ": ", res);
@@ -35,8 +35,8 @@ function getAllProjects() {
       proj.childs = [];
     });
     res.forEach((proj) => {
-      if (proj.parent) {
-        projects[proj.parent].childs.push(proj);
+      if (proj.parent_id) {
+        projects[proj.parent_id].childs.push(proj);
       } else {
         roots.push(proj);
       }
@@ -50,6 +50,6 @@ function addTask(content, due, projectid, messageContent) {
     content: content,
     description: messageContent,
     due_string: due,
-    project_id: parseInt(projectid, 10),
+    project_id: projectid,
   });
 }
