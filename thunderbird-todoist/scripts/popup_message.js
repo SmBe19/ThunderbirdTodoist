@@ -18,9 +18,7 @@ function prefillContent() {
   });
   getDisplayedMessage()
     .then(([message, tabId]) => {
-      return browser.msgurl
-        .url(tabId)
-        .then((msgurl) => formatDefaultTaskContent(message, msgurl.url));
+      return formatDefaultTaskContent(message);
     })
     .then((defaultTaskContent) => {
       document.getElementById("task_content").value = defaultTaskContent;

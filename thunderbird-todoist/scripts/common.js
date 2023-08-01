@@ -6,7 +6,7 @@ function getSelectedProject(selectid) {
   return "";
 }
 
-function fillAllProjectsSelect(selectid, selected) {
+function fillAllProjectsSelect(selectid) {
   loadDefaultProject().then((selected) => {
     getAllProjects()
       .then((projects) => {
@@ -75,7 +75,7 @@ function findMessageBody(messageId) {
     );
 }
 
-function formatDefaultTaskContent(message, maillink) {
+function formatDefaultTaskContent(message) {
   function twoDigits(num) {
     if (num < 10) {
       return "0" + num;
@@ -100,7 +100,7 @@ function formatDefaultTaskContent(message, maillink) {
       .replace("%date-mm%", twoDigits(message.date.getMinutes()))
       .replace("%date-ss%", twoDigits(message.date.getSeconds()))
       .replace("%msgid%", message.headerMessageId)
-      .replace("%msgurl%", maillink)
+      .replace("%msgurl%", "mid:" + message.headerMessageId)
   );
 }
 
@@ -128,6 +128,7 @@ function addTaskFromMessage(contentid, dueid, selectid, includebodyid, failid) {
       window.close();
     })
     .catch((err) => {
+      console.error("Adding task failed: ", err)
       document.getElementById(failid).innerHTML = "Adding Task failed...";
     });
 }
