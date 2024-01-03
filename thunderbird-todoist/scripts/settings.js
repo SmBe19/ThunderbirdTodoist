@@ -1,6 +1,7 @@
 function saveSettings() {
   const token = document.getElementById("apitoken").value;
   const defaultproject = getSelectedProject("defaultproject");
+  const defaultcollaborator = getSelectedCollaborator("defaultcollaborator");
   const defaultdue = document.getElementById("defaultdue").value;
   let defaultContentFormat = document.getElementById(
     "defaultcontentformat"
@@ -16,6 +17,7 @@ function saveSettings() {
   browser.storage.local.set({
     apitoken: token,
     defaultproject: defaultproject,
+    defaultcollaborator: defaultcollaborator,
     defaultdue: defaultdue,
     defaultcontentformat: defaultContentFormat,
     includeMessageBody: includeMessageBody ? "1" : "0",
@@ -24,7 +26,7 @@ function saveSettings() {
 
 function saveAndLoadProjects() {
   saveSettings();
-  fillAllProjectsSelect("defaultproject");
+  fillAllProjectsSelect("defaultproject"); 
 }
 
 function enableApplyToken() {
@@ -53,12 +55,23 @@ function updateCustomTaskFormat() {
     custom ? "block" : "none";
 }
 
+function updateProjectCollaborators() {
+  const project = getSelectedProject("defaultproject");
+
+  fillAllCollaboratorsSelect("defaultcollaborator", project);
+}
+
 function initSettings() {
-  loadAPIToken().then((token) => {
-    document.getElementById("apitoken").value = token || "";
-    if (token) {
-      fillAllProjectsSelect("defaultproject");
-    }
+  loadAPIToken().
+    then((token) => {
+      document.getElementById("apitoken").value = token || "";
+      if (token) {
+        fillAllProjectsSelect("defaultproject");
+      }
+    }).then((res) => {
+      loadDefaultProject().then((project) => {
+        fillAllCollaboratorsSelect("defaultcollaborator", project);
+      });
   });
   loadDefaultDue().then((res) => {
     document.getElementById("defaultdue").value = res;
@@ -91,10 +104,13 @@ document.addEventListener("DOMContentLoaded", function () {
     .addEventListener("keyup", enableApplyToken);
   document
     .getElementById("defaultproject")
+    .addEventListener("change", saveSettings);  
+  document
+    .getElementById("defaultcollaborator")
     .addEventListener("change", saveSettings);
   document
     .getElementById("tokenapplybutton")
-    .addEventListener("click", applyToken);
+    .addEventListener("click", applyToken);   
   document
     .getElementById("defaultdue")
     .addEventListener("change", saveSettings);
@@ -108,6 +124,9 @@ document.addEventListener("DOMContentLoaded", function () {
     .getElementById("include_message_body")
     .addEventListener("change", saveSettings);
 
+  document
+    .getElementById("defaultproject")
+    .addEventListener("change", updateProjectCollaborators);
   document
     .getElementById("defaultcontentformat")
     .addEventListener("change", updateCustomTaskFormat);

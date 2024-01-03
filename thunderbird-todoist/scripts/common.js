@@ -1,12 +1,20 @@
-function getSelectedProject(selectid) {
-  const projects = document.getElementById(selectid);
+function getSelectedProject(projectid) {
+  const projects = document.getElementById(projectid);
   if (projects.options[projects.selectedIndex]) {
     return projects.options[projects.selectedIndex].value;
   }
   return "";
 }
 
-function fillAllProjectsSelect(selectid) {
+function getSelectedCollaborator(collabid) {
+  const collaborators = document.getElementById(collabid);
+  if (collaborators.options[collaborators.selectedIndex]) {
+    return collaborators.options[collaborators.selectedIndex].value;
+  }
+  return "";
+}
+
+function fillAllProjectsSelect(projectselect) {
   loadDefaultProject().then((selected) => {
     getAllProjects()
       .then((projects) => {
@@ -26,14 +34,51 @@ function fillAllProjectsSelect(selectid) {
             process(child, indent + 1);
           });
         }
-        const el = document.getElementById(selectid);
+        const el = document.getElementById(projectselect);
         el.innerHTML = "";
         projects.forEach((proj) => {
           process(proj, 0);
         });
       })
       .catch((err) => {
-        const el = document.getElementById(selectid);
+        const el = document.getElementById(projectselect);
+        el.innerHTML =
+          '<option value="0">Could not connect to Todoist...</option>';
+      });
+  });
+}
+
+function fillAllCollaboratorsSelect(collaboratorselect, projectid) {
+  loadDefaultCollaborator().then((selected) => {
+    getAllCollaborators(projectid)
+      .then((collaborators) => {
+        function process(collaborator, indent) {
+          let option = document.createElement("option");
+          let text = "";
+          for (let i = 0; i < indent; i++) {
+            text += "&nbsp;&nbsp;&nbsp;";
+          }
+          option.innerHTML = text + collaborator.name;
+          option.value = collaborator.id;
+          if (collaborator.id == selected) {
+            option.selected = true;
+          }
+          el.add(option);
+        }
+        const el = document.getElementById(collaboratorselect);
+        el.innerHTML = "";
+        let arrayEmpty = true;
+        Object.values(collaborators).forEach((collaborator) => {
+          process(collaborator, 0);
+          arrayEmpty = false;
+        });
+        if (arrayEmpty) {
+          el.innerHTML =
+          '<option value="0">No collaborators in this project</option>';  
+        }
+      })
+      .catch((err) => {
+        const el = document.getElementById(collaboratorselect);
         el.innerHTML =
           '<option value="0">Could not connect to Todoist...</option>';
       });
@@ -104,12 +149,13 @@ function formatDefaultTaskContent(message) {
   );
 }
 
-function addTaskFromMessage(contentid, dueid, selectid, includebodyid, failid) {
+function addTaskFromMessage(contentid, dueid, projectid, collaboratorid, includebodyid, failid) {
   const content = document.getElementById(contentid).value;
   const due =
     document.getElementById(dueid).value ||
     document.getElementById(dueid).placeholder;
-  const project = getSelectedProject(selectid);
+  const project = getSelectedProject(projectid);
+  const assignee = getSelectedCollaborator(collaboratorid) || null;
   const includeMessageBody = includebodyid
     ? document.getElementById(includebodyid).checked
     : false;
@@ -123,7 +169,7 @@ function addTaskFromMessage(contentid, dueid, selectid, includebodyid, failid) {
         return "";
       }
     })
-    .then((messageContent) => addTask(content, due, project, messageContent))
+    .then((messageContent) => addTask(content, due, project, assignee, messageContent))
     .then((res) => {
       window.close();
     })

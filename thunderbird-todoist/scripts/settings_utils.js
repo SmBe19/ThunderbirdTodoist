@@ -8,6 +8,12 @@ function loadDefaultProject() {
     .then((res) => res.defaultproject);
 }
 
+function loadDefaultCollaborator() {
+  return browser.storage.local
+    .get("defaultcollaborator")
+    .then((res) => res.defaultcollaborator);
+}
+
 function loadDefaultDue() {
   return browser.storage.local
     .get("defaultdue")

@@ -45,11 +45,24 @@ function getAllProjects() {
   });
 }
 
-function addTask(content, due, projectid, messageContent) {
+function getAllCollaborators(projectid) {
+  let endpoint = "projects/" + projectid + "/collaborators"
+
+  return requestGet(endpoint).then((res) => {
+    let collaborators = {};
+    res.forEach((collab) => {
+      collaborators[collab.id] = collab;
+    });
+    return collaborators;
+  });
+}
+
+function addTask(content, due, projectid, assigneeid, messageContent) {
   return requestPost("tasks", {
     content: content,
     description: messageContent,
     due_string: due,
     project_id: projectid,
+    assignee_id: assigneeid,
   });
 }
