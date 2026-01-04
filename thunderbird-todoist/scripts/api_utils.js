@@ -46,10 +46,16 @@ function getAllProjects() {
 }
 
 function addTask(content, due, projectid, messageContent) {
+  let labels = [];
+  content = content.replace(/(\s)@(\S+)/g, function (match, p1, p2) {
+    labels.push(p2);
+    return p1;
+  });
   return requestPost("tasks", {
     content: content,
     description: messageContent,
     due_string: due,
     project_id: projectid,
+    labels: labels,
   });
 }
