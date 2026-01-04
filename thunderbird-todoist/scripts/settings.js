@@ -1,6 +1,6 @@
 function saveSettings() {
   const token = document.getElementById("apitoken").value;
-  const defaultproject = getSelectedProject("defaultproject");
+  const defaultproject = getSelectedValue("defaultproject");
   const defaultdue = document.getElementById("defaultdue").value;
   let defaultContentFormat = document.getElementById(
     "defaultcontentformat"

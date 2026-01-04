@@ -10,7 +10,7 @@ function doRequest(endpoint, config) {
       .fetch("https://api.todoist.com/api/v1/" + endpoint, config)
       .then((res) => {
         if (!res.ok) {
-          console.log("Error with request to " + endpoint + ": ", res);
+          console.error("Error with request to " + endpoint + ": ", res);
           return Promise.reject();
         }
         return res.json();
@@ -60,17 +60,25 @@ function getAllProjects() {
   });
 }
 
-function addTask(content, due, projectid, messageContent) {
+function getProjectCollaborators(projectid) {
+  return requestGetAllResults("projects/" + projectid + "/collaborators");
+}
+
+function addTask(content, due, projectid, assigneeid, messageContent) {
   let labels = [];
   content = content.replace(/(\s)@(\S+)/g, function (match, p1, p2) {
     labels.push(p2);
     return p1;
   });
-  return requestPost("tasks", {
+  args = {
     content: content,
     description: messageContent,
     due_string: due,
     project_id: projectid,
     labels: labels,
-  });
+  };
+  if (assigneeid) {
+    args.assignee_id = assigneeid;
+  }
+  return requestPost("tasks", args);
 }

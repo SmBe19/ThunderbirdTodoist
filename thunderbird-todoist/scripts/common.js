@@ -1,7 +1,7 @@
-function getSelectedProject(selectid) {
-  const projects = document.getElementById(selectid);
-  if (projects.options[projects.selectedIndex]) {
-    return projects.options[projects.selectedIndex].value;
+function getSelectedValue(selectid) {
+  const values = document.getElementById(selectid);
+  if (values.options[values.selectedIndex]) {
+    return values.options[values.selectedIndex].value;
   }
   return "";
 }
@@ -39,6 +39,31 @@ function fillAllProjectsSelect(selectid) {
           '<option value="0">Could not connect to Todoist...</option>';
       });
   });
+}
+
+function fillAssigneeSelect(selectid, projectId) {
+  return getProjectCollaborators(projectId)
+    .then((collaborators) => {
+      const el = document.getElementById(selectid);
+      el.style.display = collaborators.length > 1 ? "" : "none";
+      el.innerHTML = "";
+      let unassignedOption = document.createElement("option");
+      unassignedOption.text = "Unassigned";
+      unassignedOption.selected = true;
+      unassignedOption.value = "";
+      el.add(unassignedOption);
+      collaborators.forEach((collab) => {
+        let option = document.createElement("option");
+        option.text = collab.name;
+        option.value = collab.id;
+        el.add(option);
+      });
+    })
+    .catch((err) => {
+      console.error("Getting collaborators failed", err);
+      const el = document.getElementById(selectid);
+      el.style.display = "none";
+    });
 }
 
 function getDisplayedMessage() {
@@ -105,12 +130,20 @@ function formatDefaultTaskContent(message) {
   );
 }
 
-function addTaskFromMessage(contentid, dueid, selectid, includebodyid, failid) {
+function addTaskFromMessage(
+  contentid,
+  dueid,
+  selectid,
+  assigneeid,
+  includebodyid,
+  failid
+) {
   const content = document.getElementById(contentid).value;
   const due =
     document.getElementById(dueid).value ||
     document.getElementById(dueid).placeholder;
-  const project = getSelectedProject(selectid);
+  const project = getSelectedValue(selectid);
+  const assignee = getSelectedValue(assigneeid);
   const includeMessageBody = includebodyid
     ? document.getElementById(includebodyid).checked
     : false;
@@ -124,7 +157,9 @@ function addTaskFromMessage(contentid, dueid, selectid, includebodyid, failid) {
         return "";
       }
     })
-    .then((messageContent) => addTask(content, due, project, messageContent))
+    .then((messageContent) =>
+      addTask(content, due, project, assignee, messageContent)
+    )
     .then((res) => {
       window.close();
     })
