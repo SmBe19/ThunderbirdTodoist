@@ -33,6 +33,7 @@ function fillAllProjectsSelect(selectid) {
         });
       })
       .catch((err) => {
+        console.error("Getting projects failed", err);
         const el = document.getElementById(selectid);
         el.innerHTML =
           '<option value="0">Could not connect to Todoist...</option>';
