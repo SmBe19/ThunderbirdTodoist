@@ -129,7 +129,7 @@ function addTaskFromMessage(contentid, dueid, selectid, includebodyid, failid) {
       window.close();
     })
     .catch((err) => {
-      console.error("Adding task failed: ", err)
+      console.error("Adding task failed: ", err);
       document.getElementById(failid).innerHTML = "Adding Task failed...";
     });
 }

@@ -22,19 +22,34 @@ function requestGet(endpoint) {
   return doRequest(endpoint, { method: "get" });
 }
 
+function requestGetAllResults(endpoint) {
+  let results = [];
+
+  function handlePage(current_endpoint) {
+    return requestGet(current_endpoint).then((res) => {
+      results = results.concat(res.results);
+      if (res.next_cursor) {
+        return handlePage(endpoint + "?cursor=" + res.next_cursor);
+      }
+      return results;
+    });
+  }
+  return handlePage(endpoint);
+}
+
 function requestPost(endpoint, data) {
   return doRequest(endpoint, { method: "post", body: JSON.stringify(data) });
 }
 
 function getAllProjects() {
-  return requestGet("projects").then((res) => {
+  return requestGetAllResults("projects").then((res) => {
     let projects = {};
     let roots = [];
-    res.results.forEach((proj) => {
+    res.forEach((proj) => {
       projects[proj.id] = proj;
       proj.childs = [];
     });
-    res.results.forEach((proj) => {
+    res.forEach((proj) => {
       if (proj.parent_id) {
         projects[proj.parent_id].childs.push(proj);
       } else {
