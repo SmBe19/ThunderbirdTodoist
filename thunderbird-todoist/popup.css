@@ -14,7 +14,8 @@ body {
 
 .popup-input input,
 .popup-input select,
-.popup-input button {
+.popup-input button,
+.popup-input textarea {
   width: 100%;
   margin-bottom: 10px;
 }

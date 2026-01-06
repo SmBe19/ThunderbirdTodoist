@@ -20,6 +20,12 @@ function loadDefaultContentFormat() {
     .then((res) => res.defaultcontentformat || "Mail by %author%: %subject%");
 }
 
+function loadDefaultContentFormatDescription() {
+  return browser.storage.local
+    .get("defaultcontentformatdescription")
+    .then((res) => res.defaultcontentformatdescription || "");
+}
+
 function loadIncludeMessageBody() {
   return browser.storage.local
     .get("includeMessageBody")

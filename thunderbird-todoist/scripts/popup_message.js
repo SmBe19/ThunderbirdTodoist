@@ -4,6 +4,7 @@ function messageAddTask() {
     "task_due",
     "task_project",
     "task_assignee",
+    "task_description",
     "include_message_body",
     "task_add"
   );
@@ -20,13 +21,14 @@ function prefillContent() {
   loadIncludeMessageBody().then((res) => {
     document.getElementById("include_message_body").checked = res;
   });
-  getDisplayedMessage()
-    .then(([message, tabId]) => {
-      return formatDefaultTaskContent(message);
-    })
-    .then((defaultTaskContent) => {
+  getDisplayedMessage().then(([message, tabId]) => {
+    formatDefaultTaskContent(message).then((defaultTaskContent) => {
       document.getElementById("task_content").value = defaultTaskContent;
     });
+    formatDefaultTaskContentDescription(message).then((defaultDescription) => {
+      document.getElementById("task_description").value = defaultDescription;
+    });
+  });
 }
 
 document.addEventListener("DOMContentLoaded", function () {

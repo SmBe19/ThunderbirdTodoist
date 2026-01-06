@@ -2,6 +2,9 @@ function saveSettings() {
   const token = document.getElementById("apitoken").value;
   const defaultproject = getSelectedValue("defaultproject");
   const defaultdue = document.getElementById("defaultdue").value;
+  let defaultContentFormatDescription = document.getElementById(
+    "defaultcontentformat-description"
+  ).value;
   let defaultContentFormat = document.getElementById(
     "defaultcontentformat"
   ).value;
@@ -9,6 +12,8 @@ function saveSettings() {
     defaultContentFormat = document.getElementById(
       "defaultcontentformat-custom"
     ).value;
+  } else {
+    defaultContentFormatDescription = "";
   }
   const includeMessageBody = document.getElementById(
     "include_message_body"
@@ -18,6 +23,7 @@ function saveSettings() {
     defaultproject: defaultproject,
     defaultdue: defaultdue,
     defaultcontentformat: defaultContentFormat,
+    defaultcontentformatdescription: defaultContentFormatDescription,
     includeMessageBody: includeMessageBody ? "1" : "0",
   });
 }
@@ -63,14 +69,19 @@ function initSettings() {
   loadDefaultDue().then((res) => {
     document.getElementById("defaultdue").value = res;
   });
-  loadDefaultContentFormat().then((res) => {
-    const element = document.getElementById("defaultcontentformat");
-    element.value = res;
-    if (element.value !== res) {
-      element.value = "custom";
-      document.getElementById("defaultcontentformat-custom").value = res;
-    }
-    updateCustomTaskFormat();
+  loadDefaultContentFormatDescription().then((description) => {
+    document.getElementById("defaultcontentformat-description").value =
+      description;
+    loadDefaultContentFormat().then((contentFormat) => {
+      const element = document.getElementById("defaultcontentformat");
+      element.value = contentFormat;
+      if (element.value !== contentFormat || description.length > 0) {
+        element.value = "custom";
+        document.getElementById("defaultcontentformat-custom").value =
+          contentFormat;
+      }
+      updateCustomTaskFormat();
+    });
   });
   loadIncludeMessageBody().then((res) => {
     document.getElementById("include_message_body").checked = res;
@@ -103,6 +114,9 @@ document.addEventListener("DOMContentLoaded", function () {
     .addEventListener("change", saveSettings);
   document
     .getElementById("defaultcontentformat-custom")
+    .addEventListener("change", saveSettings);
+  document
+    .getElementById("defaultcontentformat-description")
     .addEventListener("change", saveSettings);
   document
     .getElementById("include_message_body")

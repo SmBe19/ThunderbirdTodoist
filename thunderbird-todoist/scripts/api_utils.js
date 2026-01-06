@@ -47,11 +47,11 @@ function getAllProjects() {
     let roots = [];
     res.forEach((proj) => {
       projects[proj.id] = proj;
-      proj.childs = [];
+      proj.children = [];
     });
     res.forEach((proj) => {
       if (proj.parent_id) {
-        projects[proj.parent_id].childs.push(proj);
+        projects[proj.parent_id].children.push(proj);
       } else {
         roots.push(proj);
       }
@@ -64,7 +64,7 @@ function getProjectCollaborators(projectid) {
   return requestGetAllResults("projects/" + projectid + "/collaborators");
 }
 
-function addTask(content, due, projectid, assigneeid, messageContent) {
+function addTask(content, due, projectid, assigneeid, description) {
   let labels = [];
   content = content.replace(/(\s)@(\S+)/g, function (match, p1, p2) {
     labels.push(p2);
@@ -72,7 +72,7 @@ function addTask(content, due, projectid, assigneeid, messageContent) {
   });
   args = {
     content: content,
-    description: messageContent,
+    description: description,
     due_string: due,
     project_id: projectid,
     labels: labels,

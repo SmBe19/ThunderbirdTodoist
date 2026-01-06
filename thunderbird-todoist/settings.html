@@ -64,10 +64,12 @@
       <div class="popup-indented" id="defaultcontentformat-custom-wrapper">
         <div class="popup-label">
           You can use the following parameters which get replaced by the value
-          from the message:<br />%author%, %subject%, %msgid%, %msgurl%,<br />%date-Y%,
-          %date-M%, %date-D%, %date-h%, %date-m%, %date-s%, %date-YYYY%,
-          %date-MM%, %date-DD%, %date-hh%, %date-mm%, %date-ss%
+          from the message:<br />%author%, %subject%, %msgid%, %msgurl%,
+          %body%,<br />%date-Y%, %date-M%, %date-D%, %date-h%, %date-m%,
+          %date-s%, %date-YYYY%, %date-MM%, %date-DD%, %date-hh%, %date-mm%,
+          %date-ss%
         </div>
+        <div class="popup-label">Task Title:</div>
         <div class="popup-input">
           <input
             type="text"
@@ -75,11 +77,20 @@
             id="defaultcontentformat-custom"
           />
         </div>
+        <div class="popup-label">Task Description:</div>
+        <div class="popup-input">
+          <textarea
+            cols="40"
+            rows="3"
+            placeholder="Description..."
+            id="defaultcontentformat-description"
+          ></textarea>
+        </div>
       </div>
       <div>
         <label>
           <input type="checkbox" id="include_message_body" />
-          Add mail content as task description by default
+          Add mail content to task description by default
         </label>
       </div>
     </div>

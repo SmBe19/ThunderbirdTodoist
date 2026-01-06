@@ -4,6 +4,7 @@ function messageAddTask() {
     "task_due",
     "task_project",
     "task_assignee",
+    "task_description",
     undefined,
     "task_add"
   );
