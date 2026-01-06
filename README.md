@@ -18,6 +18,8 @@ If you have installed this prior to version 0.6 you will need to follow the inst
 
 ### Linux
 
+Run the following script:
+
 ``` bash
 cat > ~/.local/share/applications/thunderbird-todoist-mid.desktop << EOF
 [Desktop Entry]
@@ -67,3 +69,6 @@ Windows Registry Editor Version 5.00
 ```
 
 If you have issues with getting this to work, please check out [this issue](https://github.com/SmBe19/ThunderbirdTodoist/issues/13) and comment there if this does not resolve it.
+
+### Mac (untested)
+In theory, Thunderbird on Mac does not require any special setup to work with mail links. However, this does not seem to always work. Users have reported success with using [SwiftDefaultApps](https://github.com/Lord-Kamina/SwiftDefaultApps) to correctly set the default app for the `mid` URL scheme.
